@@ -12,7 +12,7 @@ type PostgresUser struct {
 }
 
 func NewPostgresUser(db *sqlx.DB) *PostgresUser {
-	return &Userpostgres{db: db}
+	return &PostgresUser{db: db}
 }
 
 func (p *PostgresUser) CreateUser(userProfile dto.UserProfile) (int, error) {

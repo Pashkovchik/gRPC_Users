@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	userKey      = "users"
+	usersKey     = "users"
 	cacheExpires = 60
 )
 

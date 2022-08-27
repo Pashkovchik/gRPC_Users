@@ -2,6 +2,7 @@ package main
 
 import (
 	"gRPC_Users/internal/repository"
+	"gRPC_Users/internal/service"
 	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
@@ -19,7 +20,7 @@ func main() {
 		log.Fatalf("error loading env variables: #{err.Error()}")
 	}
 
-	_, err := repository.NewPostgresDB(repository.Config{
+	db, err := repository.NewPostgresDB(repository.Config{
 		Host:     viper.GetString("db.host"),
 		Port:     viper.GetString("db.port"),
 		Username: viper.GetString("db.username"),
@@ -32,7 +33,7 @@ func main() {
 	}
 
 	dbCount, _ := strconv.Atoi(viper.GetString("redis.dbcount"))
-	_, err := repository.NewRedisDB(repository.ConfigRedis{
+	client, err := repository.NewRedisDB(repository.ConfigRedis{
 		Host:     viper.GetString("redis.host"),
 		Port:     viper.GetString("redis.port"),
 		Password: "",
@@ -42,13 +43,18 @@ func main() {
 		log.Fatalf("failed to initialize db: #{err.Error()}")
 	}
 
-	_, err := repository.NewClickHouseDB(repository.ConfigClickHouse{
+	con, err := repository.NewClickHouseDB(repository.ConfigClickHouse{
 		Host: viper.GetString("clickHouse.host"),
 		Port: viper.GetString("clickhouse.port"),
 	})
 	if err != nil {
 		log.Fatalf("failed to initialize ClickHouseDB: #{err.Error()}")
 	}
+
+	repos := repository.NewRepository(db)
+	reposRedis := repository.NewRedisRepository(client)
+	services := service.NewService(repos, reposRedis)
+	handlers := 
 
 }
 
