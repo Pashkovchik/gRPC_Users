@@ -42,6 +42,14 @@ func main() {
 		log.Fatalf("failed to initialize db: #{err.Error()}")
 	}
 
+	_, err := repository.NewClickHouseDB(repository.ConfigClickHouse{
+		Host: viper.GetString("clickHouse.host"),
+		Port: viper.GetString("clickhouse.port"),
+	})
+	if err != nil {
+		log.Fatalf("failed to initialize ClickHouseDB: #{err.Error()}")
+	}
+
 }
 
 func initConfig() error {
