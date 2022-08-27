@@ -7,6 +7,7 @@ import (
 	"github.com/spf13/viper"
 	"log"
 	"os"
+	"strconv"
 )
 
 func main() {
@@ -25,6 +26,17 @@ func main() {
 		Password: os.Getenv("DB_PASSWORD"),
 		DBName:   viper.GetString("db.dbname"),
 		SSLMode:  viper.GetString("db.sslmode"),
+	})
+	if err != nil {
+		log.Fatalf("failed to initialize db: #{err.Error()}")
+	}
+
+	dbCount, _ := strconv.Atoi(viper.GetString("redis.dbcount"))
+	_, err := repository.NewRedisDB(repository.ConfigRedis{
+		Host:     viper.GetString("redis.host"),
+		Port:     viper.GetString("redis.port"),
+		Password: "",
+		DB:       dbCount,
 	})
 	if err != nil {
 		log.Fatalf("failed to initialize db: #{err.Error()}")
