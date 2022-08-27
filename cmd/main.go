@@ -54,7 +54,10 @@ func main() {
 	repos := repository.NewRepository(db)
 	reposRedis := repository.NewRedisRepository(client)
 	services := service.NewService(repos, reposRedis)
-	handlers := 
+	// доделать handlers :=
+
+	reposClickHouse := repository.NewClickHouseRepository(con)
+	consumer := queue
 
 }
 
