@@ -1,12 +1,16 @@
 package main
 
 import (
+	"context"
+	"gRPC_Users/internal/queue"
 	"gRPC_Users/internal/repository"
 	"gRPC_Users/internal/service"
 	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
+	"google.golang.org/grpc"
 	"log"
+	"net"
 	"os"
 	"strconv"
 )
@@ -57,7 +61,15 @@ func main() {
 	// доделать handlers :=
 
 	reposClickHouse := repository.NewClickHouseRepository(con)
-	consumer := queue
+	consumer := queue.NewConsumer(reposClickHouse)
+	go consumer.LogCreateUsr(context.Background())
+
+	listener, err := net.Listen("tcp", "localhost:8090")
+	if err != nil {
+		log.Fatalf("could not listen on port")
+	}
+
+	grpcServer := grpc.NewServer()
 
 }
 
