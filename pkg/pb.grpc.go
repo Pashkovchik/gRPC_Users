@@ -59,7 +59,7 @@ type UserApiServer interface {
 type UnimplementedUserApiServer struct {
 }
 
-func (UnimplementedUserApiServer) GetUsers(ctx context.Context, empty *empty.Empty) (*GetUserResponse, error) {
+func (UnimplementedUserApiServer) GetUsers(context.Context, *empty.Empty) (*GetUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUsers not implemented")
 }
 
@@ -126,7 +126,7 @@ func UserApiDeleteUserHandler(srv interface{}, ctx context.Context, dec func(int
 	if interceptor == nil {
 		return srv.(UserApiServer).DeleteUser(ctx, in)
 	}
-	info := grpc.UnaryServerInfo{
+	info := &grpc.UnaryServerInfo{
 		Server:     srv,
 		FullMethod: "/main.UserApi/DeleteUser",
 	}
