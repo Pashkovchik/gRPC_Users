@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"gRPC_Users/internal/handler"
 	"gRPC_Users/internal/queue"
 	"gRPC_Users/internal/repository"
 	"gRPC_Users/internal/service"
@@ -59,7 +60,7 @@ func main() {
 	repos := repository.NewRepository(db)
 	reposRedis := repository.NewRedisRepository(client)
 	services := service.NewService(repos, reposRedis)
-	// доделать handlers :=
+	handlers := handler.NewHandler(services)
 
 	reposClickHouse := repository.NewClickHouseRepository(con)
 	consumer := queue.NewConsumer(reposClickHouse)

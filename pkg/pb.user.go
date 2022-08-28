@@ -9,13 +9,13 @@ import (
 )
 
 type GetUserResponse struct {
-	state protoimpl.MessageState
-	sizeCache protoimpl.SizeCache
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
-	Users []*User `json:"users,omitempty" protobuf:"bytes,1,rep,name=users,proto3"`
+	Users         []*User `json:"users,omitempty" protobuf:"bytes,1,rep,name=users,proto3"`
 }
 
-func (g *GetUserResponse) Reset () {
+func (g *GetUserResponse) Reset() {
 	*g = GetUserResponse{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_api_user_proto_msgTypes[0]
@@ -24,15 +24,15 @@ func (g *GetUserResponse) Reset () {
 	}
 }
 
-func (g *GetUserResponse) String() {
+func (g *GetUserResponse) String() string {
 	return protoimpl.X.MessageStringOf(g)
 }
 
-func (*GetUserResponse) ProtoMessage (){}
+func (*GetUserResponse) ProtoMessage() {}
 
 func (g *GetUserResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_api_user_proto_msgTypes[0]
-	if protoimpl.UnsafeEnabled && x != nil {
+	if protoimpl.UnsafeEnabled && g != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(g))
 		if ms.LoadMessageInfo() == nil {
 			ms.StoreMessageInfo(mi)
@@ -42,7 +42,7 @@ func (g *GetUserResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(g)
 }
 
-func (*GetUserResponse) Descriptor() ([]byte,[]int) {
+func (*GetUserResponse) Descriptor() ([]byte, []int) {
 	return file_api_user_proto_rawDescGZIP(), []int{0}
 }
 
@@ -54,12 +54,12 @@ func (g *GetUserResponse) GetUsers() []*User {
 }
 
 type User struct {
-	state protoimpl.MessageState
-	sizeCache protoimpl.SizeCache
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id int32 `json:"id,omitempty" protobuf:"varint,1,opt,name=id,proto3"`
-	Name string `json:"name,omitempty" protobuf:"bytes,2,opt,name=name,proto3"`
+	Id    int32  `json:"id,omitempty" protobuf:"varint,1,opt,name=id,proto3"`
+	Name  string `json:"name,omitempty" protobuf:"bytes,2,opt,name=name,proto3"`
 	Email string `json:"email,omitempty" protobuf:"bytes,3,opt,name=email,proto3"`
 }
 
@@ -76,7 +76,7 @@ func (u *User) String() string {
 	return protoimpl.X.MessageStringOf(u)
 }
 
-func (*User) ProtoMessage {}
+func (*User) ProtoMessage() {}
 
 func (u *User) ProtoReflect() protoreflect.Message {
 	mi := &file_api_user_proto_msgTypes[1]
@@ -87,7 +87,7 @@ func (u *User) ProtoReflect() protoreflect.Message {
 		}
 		return ms
 	}
-	return mi.Messageof(u)
+	return mi.MessageOf(u)
 }
 
 func (*User) Descriptor() ([]byte, []int) {
@@ -101,7 +101,7 @@ func (u *User) GetId() int32 {
 	return 0
 }
 
-func (u *User) GetName() string{
+func (u *User) GetName() string {
 	if u != nil {
 		return u.Name
 	}
@@ -116,11 +116,11 @@ func (u *User) getEmail() string {
 }
 
 type CreateUserRequest struct {
-	state protoimpl.MessageState
-	sizeCache protoimpl.SizeCache
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name string `json:"name,omitempty" protobuf:"bytes,,1,opt,name=name,proto3"`
+	Name  string `json:"name,omitempty" protobuf:"bytes,1,opt,name=name,proto3"`
 	Email string `json:"email,omitempty" protobuf:"bytes,2,opt,name=email,proto3"`
 }
 
@@ -170,8 +170,8 @@ func (c *CreateUserRequest) GetEmail() string {
 }
 
 type CreateUserResponse struct {
-	state protoimpl.MessageState
-	sizeCache protoimpl.SizeCache
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
 	Id int32 `json:"id,omitempty" protobuf:"varint,1,opt,name=id,proto3"`
@@ -194,7 +194,7 @@ func (*CreateUserResponse) ProtoMessage() {}
 
 func (c *CreateUserResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_api_user_proto_msgTypes[3]
-	if protoimpl.UnsafeEnabled && x != nil {
+	if protoimpl.UnsafeEnabled && c != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(c))
 		if ms.LoadMessageInfo() == nil {
 			ms.StoreMessageInfo(mi)
@@ -216,15 +216,15 @@ func (c *CreateUserResponse) GetId() int32 {
 }
 
 type DeleteUserRequest struct {
-	state protoimpl.MessageState
-	sizeCache protoimpl.SizeCache
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
 	Id int32 `json:"id,omitempty" protobuf:"varint,1,opt,name=id,proto3"`
 }
 
 func (d *DeleteUserRequest) Reset() {
-	&d = DeleteUserRequest{}
+	&d = DeleteUserRequest{} //error
 	if protoimpl.UnsafeEnabled {
 		mi := &file_api_user_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(d))
@@ -233,10 +233,6 @@ func (d *DeleteUserRequest) Reset() {
 }
 
 func (d *DeleteUserRequest) String() string {
-	return protoimpl.X.MessageStringOf(d)
-}
-
-func (d *DeleteUserRequest) String() string{
 	return protoimpl.X.MessageStringOf(d)
 }
 
@@ -317,7 +313,7 @@ func file_api_user_proto_rawDescGZIP() []byte {
 var file_api_user_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 
 var file_api_user_proto_goTypes = []interface{}{
-	(*GetUsersResponse)(nil),   // 0: main.GetUsersResponse
+	(*GetUserResponse)(nil),    // 0: main.GetUsersResponse
 	(*User)(nil),               // 1: main.User
 	(*CreateUserRequest)(nil),  // 2: main.CreateUserRequest
 	(*CreateUserResponse)(nil), // 3: main.CreateUserResponse
@@ -340,7 +336,7 @@ var file_api_user_proto_depIdxs = []int32{
 	0, // [0:1] is the sub-list for field type_name
 }
 
-func init() {file_api_user_proto_init()}
+func init() { file_api_user_proto_init() }
 
 func file_api_user_proto_init() {
 	if File_api_user_proto != nil {
@@ -348,7 +344,7 @@ func file_api_user_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_api_user_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetUsersResponse); i {
+			switch v := v.(*GetUserResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -408,7 +404,7 @@ func file_api_user_proto_init() {
 			}
 		}
 	}
-	type x struct {}
+	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
@@ -427,4 +423,3 @@ func file_api_user_proto_init() {
 	file_api_user_proto_goTypes = nil
 	file_api_user_proto_depIdxs = nil
 }
-

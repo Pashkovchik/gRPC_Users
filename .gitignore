@@ -1,1 +1,6 @@
 .idea/
+
+data/
+
+.env.dist
+configs/config.dist.yml

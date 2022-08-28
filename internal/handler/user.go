@@ -12,7 +12,7 @@ import (
 	"strconv"
 )
 
-func (h *Handler) GetUsers (_ context.Context, _ *empty.Empty) (*pkg.GetUserResponse, error) {
+func (h *Handler) GetUsers(_ context.Context, _ *empty.Empty) (*pkg.GetUserResponse, error) {
 	users, err := h.services.User.GetUsers()
 	if err != nil {
 		log.Fatalln(err)
@@ -22,8 +22,8 @@ func (h *Handler) GetUsers (_ context.Context, _ *empty.Empty) (*pkg.GetUserResp
 
 	for _, user := range users {
 		u := pkg.User{
-			Id: int32(user.Id),
-			Name: user.Name,
+			Id:    int32(user.Id),
+			Name:  user.Name,
 			Email: user.Email,
 		}
 		response.Users = append(response.Users, &u)
@@ -34,7 +34,7 @@ func (h *Handler) GetUsers (_ context.Context, _ *empty.Empty) (*pkg.GetUserResp
 
 func (h *Handler) CreateUser(ctx context.Context, req *pkg.CreateUserRequest) (*pkg.CreateUserResponse, error) {
 	command := dto.UserProfile{
-		Name: req.Name
+		Name:  req.Name,
 		Email: req.Email,
 	}
 
@@ -43,7 +43,7 @@ func (h *Handler) CreateUser(ctx context.Context, req *pkg.CreateUserRequest) (*
 	w := kafka.Writer{Topic: queue.Topic, Addr: kafka.TCP(queue.BrokerAddress)}
 
 	err := w.WriteMessages(ctx, kafka.Message{
-		Key: []byte(strconv.Itoa(id)),
+		Key:   []byte(strconv.Itoa(id)),
 		Value: []byte("this is message: " + req.Name + " " + req.Email),
 	})
 	if err != nil {

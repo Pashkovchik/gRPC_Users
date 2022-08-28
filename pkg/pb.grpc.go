@@ -18,8 +18,8 @@ type userApiClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewUserApiClient(cc grpc.ClientConnInterface) UserApiClient {
-	return &userApiClient{cc: cc}
+func NewUserApiClient(cc grpc.ClientConnInterface) *userApiClient {
+	return &userApiClient{cc}
 }
 
 func (u *userApiClient) GetUsers(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*GetUserResponse, error) {
@@ -51,8 +51,8 @@ func (u *userApiClient) DeleteUser(ctx context.Context, in *DeleteUserRequest, o
 
 type UserApiServer interface {
 	GetUsers(ctx context.Context, empty2 *empty.Empty) (*GetUserResponse, error)
-	CreateUser(ctx context.Context, *CreateUserRequest) (*CreateUserResponse, error)
-	DeleteUser(ctx context.Context, *DeleteUserRequest) (*empty.Empty, error)
+	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
+	DeleteUser(context.Context, *DeleteUserRequest) (*empty.Empty, error)
 	mustEmbedUnimplementedUserApiServer()
 }
 
@@ -63,11 +63,11 @@ func (UnimplementedUserApiServer) GetUsers(ctx context.Context, empty *empty.Emp
 	return nil, status.Errorf(codes.Unimplemented, "method GetUsers not implemented")
 }
 
-func (UnimplementedUserApiServer) CreateUser(ctx context.Context, *CreateUserRequest) (*CreateUserResponse, error) {
+func (UnimplementedUserApiServer) CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateUsers not implemented")
 }
 
-func (UnimplementedUserApiServer) DeleteUser(ctx context.Context, *DeleteUserRequest) (*empty.Empty, error) {
+func (UnimplementedUserApiServer) DeleteUser(context.Context, *DeleteUserRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteUsers not implemented")
 }
 
@@ -79,10 +79,10 @@ type UnsafeUserApiServer interface {
 }
 
 func RegisterUserApiServer(s grpc.ServiceRegistrar, srv UserApiServer) {
-	s.RegisterService(&UserApi_ServiceDesc, srv)
+	s.RegisterService(&UserApiServiceDesc, srv)
 }
 
-func UserApiGetUsersHandler (srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func UserApiGetUsersHandler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(empty.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
@@ -91,7 +91,7 @@ func UserApiGetUsersHandler (srv interface{}, ctx context.Context, dec func(inte
 		return srv.(UserApiServer).GetUsers(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
-		Server: srv,
+		Server:     srv,
 		FullMethod: "/main.UserApi/GetUsers",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
@@ -100,7 +100,7 @@ func UserApiGetUsersHandler (srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
-func UserApiCreateUserHandler (srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func UserApiCreateUserHandler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateUserRequest)
 	if err := dec(in); err != nil {
 		return nil, err
@@ -109,7 +109,7 @@ func UserApiCreateUserHandler (srv interface{}, ctx context.Context, dec func(in
 		return srv.(UserApiServer).CreateUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
-		Server: srv,
+		Server:     srv,
 		FullMethod: "/main.UserApi/CreateUser",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
@@ -118,7 +118,7 @@ func UserApiCreateUserHandler (srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
-func UserApiDeleteUserHandler (srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func UserApiDeleteUserHandler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteUserRequest)
 	if err := dec(in); err != nil {
 		return nil, err
@@ -127,32 +127,32 @@ func UserApiDeleteUserHandler (srv interface{}, ctx context.Context, dec func(in
 		return srv.(UserApiServer).DeleteUser(ctx, in)
 	}
 	info := grpc.UnaryServerInfo{
-		Server: srv,
+		Server:     srv,
 		FullMethod: "/main.UserApi/DeleteUser",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserApiServer).DeleteUser(ctx, req.(*DeleteUserRequest))
 	}
-	return interceptor(ctx, in, info, handler)
+	return interceptor(ctx, in, info, handler) //исправить
 }
 
 var UserApiServiceDesc = grpc.ServiceDesc{
 	ServiceName: "main.UserApi",
 	HandlerType: (*UserApiServer)(nil),
-	Methods: []grpc.MethodDesc {
+	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "GetUsers",
-			Handler: UserApiGetUsersHandler,
+			Handler:    UserApiGetUsersHandler,
 		},
 		{
 			MethodName: "CreateUser",
-			Handler: UserApiCreateUserHandler,
+			Handler:    UserApiCreateUserHandler,
 		},
 		{
 			MethodName: "DeleteUser",
-			Handler: UserApiDeleteUserHandler
+			Handler:    UserApiDeleteUserHandler,
 		},
 	},
-	Streams: []grpc.StreamDesc{},
+	Streams:  []grpc.StreamDesc{},
 	Metadata: "api/user.proto",
 }
