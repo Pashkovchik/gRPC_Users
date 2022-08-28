@@ -10,7 +10,7 @@ func NewClickHouseLogs(con *clickhouse.Conn) *ClickHouseLogs {
 	return &ClickHouseLogs{con: con}
 }
 
-func (c *ClickHouseLogs) SaveCreatedUserId(logMessage string) error {
+func (c *ClickHouseLogs) SaveCreatedUserLog(logMessage string) error {
 	q := clickhouse.NewQuery("INSERT INTO default.logs VALUES (toDate(now()), ?, ?)", 1, logMessage)
 	err := q.Exec(c.con)
 

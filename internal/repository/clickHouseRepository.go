@@ -3,7 +3,7 @@ package repository
 import "github.com/roistat/go-clickhouse"
 
 type ClickHouseLog interface {
-	SaveCreateUserLog(logMessage string) error
+	SaveCreatedUserLog(logMessage string) error
 }
 
 type ClickHouse struct {
@@ -12,6 +12,6 @@ type ClickHouse struct {
 
 func NewClickHouseRepository(con *clickhouse.Conn) *ClickHouse {
 	return &ClickHouse{
-		NewClickHouseLogs(con),
+		ClickHouseLog: NewClickHouseLogs(con),
 	}
 }

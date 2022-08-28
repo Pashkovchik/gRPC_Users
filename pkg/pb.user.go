@@ -174,7 +174,7 @@ type CreateUserResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id int32 `json:"id,omitempty" protobuf:"varint,1,opt,name=id,proto3"`
+	Id int32 `json:"id,omitempty" protobuf:"int,1,opt,name=id,proto3"`
 }
 
 func (c *CreateUserResponse) Reset() {
@@ -224,7 +224,7 @@ type DeleteUserRequest struct {
 }
 
 func (d *DeleteUserRequest) Reset() {
-	&d = DeleteUserRequest{} //error
+	*d = DeleteUserRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_api_user_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(d))
@@ -235,6 +235,8 @@ func (d *DeleteUserRequest) Reset() {
 func (d *DeleteUserRequest) String() string {
 	return protoimpl.X.MessageStringOf(d)
 }
+
+func (*DeleteUserRequest) ProtoMessage() {}
 
 func (d *DeleteUserRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_api_user_proto_msgTypes[4]
