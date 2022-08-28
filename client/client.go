@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"gRPC_Users/pkg"
 	"google.golang.org/grpc"
 	"log"
@@ -16,5 +17,11 @@ func main() {
 	client := pkg.NewUserApiClient(conn)
 
 	resp, err := client.CreateUser(context.Background(), &pkg.CreateUserRequest{Name: "Kristina", Email: "fix@mail.ru"})
+	if err != nil {
+		return
+	}
+
+	fmt.Println(resp)
+	fmt.Println(resp.Id)
 
 }
