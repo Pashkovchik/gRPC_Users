@@ -9,7 +9,7 @@ import (
 type User interface {
 	CreateUser(userProfile dto.UserProfile) (int, error)
 	DeleteUser(userId dto.UserId) error
-	GetUser() ([]entity.User, error)
+	GetUsers() ([]entity.User, error)
 }
 
 type Service struct {
