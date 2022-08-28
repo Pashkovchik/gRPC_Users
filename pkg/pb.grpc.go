@@ -82,7 +82,7 @@ func RegisterUserApiServer(s grpc.ServiceRegistrar, srv UserApiServer) {
 	s.RegisterService(&UserApi_ServiceDesc, srv)
 }
 
-func UserApiGetUsersHandler (srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryClientInterceptor) (interface{}, error) {
+func UserApiGetUsersHandler (srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(empty.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
