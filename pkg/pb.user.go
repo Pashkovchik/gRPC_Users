@@ -15,14 +15,31 @@ type GetUserResponse struct {
 	Users []*User `json:"users,omitempty" protobuf:"bytes,1,rep,name=users,proto3"`
 }
 
-type User struct {
-	state protoimpl.MessageState
-	sizeCache protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
+func (g *GetUserResponse) Reset () {
+	*g = GetUserResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_user_proto_msgTypes[0]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(g))
+		ms.StoreMessageInfo(mi)
+	}
+}
 
-	Id int32 `json:"id,omitempty" protobuf:"varint,1,opt,name=id,proto3"`
-	Name string `json:"name,omitempty" protobuf:"bytes,2,opt,name=name,proto3"`
-	Email string `json:"email,omitempty" protobuf:"bytes,3,opt,name=email,proto3"`
+func (g *GetUserResponse) String() {
+	return protoimpl.X.MessageStringOf(g)
+}
+
+func (*GetUserResponse) ProtoMessage (){}
+
+func (g *GetUserResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_user_proto_msgTypes[0]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(g))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(g)
 }
 
 func (*GetUserResponse) Descriptor() ([]byte,[]int) {
@@ -34,6 +51,16 @@ func (g *GetUserResponse) GetUsers() []*User {
 		return g.Users
 	}
 	return nil
+}
+
+type User struct {
+	state protoimpl.MessageState
+	sizeCache protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id int32 `json:"id,omitempty" protobuf:"varint,1,opt,name=id,proto3"`
+	Name string `json:"name,omitempty" protobuf:"bytes,2,opt,name=name,proto3"`
+	Email string `json:"email,omitempty" protobuf:"bytes,3,opt,name=email,proto3"`
 }
 
 func (u *User) Reset() {
@@ -63,7 +90,121 @@ func (u *User) ProtoReflect() protoreflect.Message {
 	return mi.Messageof(u)
 }
 
-func (*CreateUserResponse) Descriptor() ([]byte,[]int) {
+func (*User) Descriptor() ([]byte, []int) {
+	return file_api_user_proto_rawDescGZIP(), []int{1}
+}
+
+func (u *User) GetId() int32 {
+	if u != nil {
+		return u.Id
+	}
+	return 0
+}
+
+func (u *User) GetName() string{
+	if u != nil {
+		return u.Name
+	}
+	return ""
+}
+
+func (u *User) getEmail() string {
+	if u != nil {
+		return u.Email
+	}
+	return ""
+}
+
+type CreateUserRequest struct {
+	state protoimpl.MessageState
+	sizeCache protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Name string `json:"name,omitempty" protobuf:"bytes,,1,opt,name=name,proto3"`
+	Email string `json:"email,omitempty" protobuf:"bytes,2,opt,name=email,proto3"`
+}
+
+func (c *CreateUserRequest) Reset() {
+	*c = CreateUserRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_user_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(c))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (c *CreateUserRequest) String() string {
+	return protoimpl.X.MessageStringOf(c)
+}
+
+func (*CreateUserRequest) ProtoMessage() {}
+
+func (c *CreateUserRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_user_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && c != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(c))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(c)
+}
+
+func (c *CreateUserRequest) Descriptor() ([]byte, []int) {
+	return file_api_user_proto_rawDescGZIP(), []int{2}
+}
+
+func (c *CreateUserRequest) GetName() string {
+	if c != nil {
+		return c.Name
+	}
+	return ""
+}
+
+func (c *CreateUserRequest) GetEmail() string {
+	if c != nil {
+		return c.Email
+	}
+	return ""
+}
+
+type CreateUserResponse struct {
+	state protoimpl.MessageState
+	sizeCache protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id int32 `json:"id,omitempty" protobuf:"varint,1,opt,name=id,proto3"`
+}
+
+func (c *CreateUserResponse) Reset() {
+	*c = CreateUserResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_user_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(c))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (c *CreateUserResponse) String() string {
+	return protoimpl.X.MessageStringOf(c)
+}
+
+func (*CreateUserResponse) ProtoMessage() {}
+
+func (c *CreateUserResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_user_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(c))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(c)
+}
+
+func (*CreateUserResponse) Descriptor() ([]byte, []int) {
 	return file_api_user_proto_rawDescGZIP(), []int{3}
 }
 
@@ -92,6 +233,10 @@ func (d *DeleteUserRequest) Reset() {
 }
 
 func (d *DeleteUserRequest) String() string {
+	return protoimpl.X.MessageStringOf(d)
+}
+
+func (d *DeleteUserRequest) String() string{
 	return protoimpl.X.MessageStringOf(d)
 }
 
