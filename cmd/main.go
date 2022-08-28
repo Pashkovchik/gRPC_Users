@@ -5,6 +5,7 @@ import (
 	"gRPC_Users/internal/queue"
 	"gRPC_Users/internal/repository"
 	"gRPC_Users/internal/service"
+	"gRPC_Users/pkg"
 	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
@@ -71,6 +72,10 @@ func main() {
 
 	grpcServer := grpc.NewServer()
 
+	pkg.RegisterUserApiServer(grpcServer, handlers)
+
+	log.Println("Starting server...")
+	grpcServer.Serve(listener)
 }
 
 func initConfig() error {
