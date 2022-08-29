@@ -22,6 +22,5 @@ func main() {
 	}
 
 	fmt.Println(resp)
-	fmt.Println(resp.Id)
 
 }

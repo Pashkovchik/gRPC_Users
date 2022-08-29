@@ -8,5 +8,7 @@
 
 Запуск сервиса:
 1. Скопировать configs: cp configs/config.dist.yml configs/config.yml и переменные окружения: cp .env.dist .env
-2. Поднимаем сервис: make init
+2. Поднимаем сервис: 
+    - docker-compose build
+    - docker-compose up
 3. Запускаем клиент: go run client/client.go
