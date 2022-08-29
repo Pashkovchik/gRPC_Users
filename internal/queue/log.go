@@ -15,7 +15,7 @@ func (c *Consumer) LogCreateUsr(ctx context.Context) {
 
 	for {
 		msg, _ := reader.ReadMessage(ctx)
-		err := c.repoClickHouse.SaveCreateUserLog(string(msg.Value))
+		err := c.repoClickHouse.SaveCreatedUserLog(string(msg.Value))
 		if err != nil {
 			log.Fatalf("save created user log err: #{err}")
 		}

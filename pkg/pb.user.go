@@ -261,7 +261,7 @@ func (d *DeleteUserRequest) GetId() int32 {
 	return 0
 }
 
-var File_api_user_proto protoreflect.FieldDescriptor
+var File_api_user_proto protoreflect.FileDescriptor
 
 var file_api_user_proto_rawDesc = []byte{
 	0x0a, 0x0e, 0x61, 0x70, 0x69, 0x2f, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
